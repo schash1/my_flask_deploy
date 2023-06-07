@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}
+User #{{ user.id }}
+{% endblock %}
+{% block body %}
+<h1>
+    {{ user.username }}
+</h1>
+<h2>
+    {{ user.first_name }} {{ user.last_name }}
+</h2>
+{% if user.is_staff %}
+<span class="badge bg-secondary">staff</span>
+{% endif %}
+<div>
+Articles: 
+<ul>
+    {% for article in user.author.articles %}
+    <li>{{article.id}} - {{ article.title }}</li>
+    {% endfor %}
+</ul>
+</div>
+<div>
+    <a href="{{ url_for('users_app.list') }}">Back to users list</a>
+</div>
+<div>
+    <a href="{{ url_for('articles_app.list') }}">Back to articles list</a>
+</div>
+{% endblock %}
